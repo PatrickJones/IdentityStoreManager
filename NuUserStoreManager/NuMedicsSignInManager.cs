@@ -25,7 +25,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> CanSignInAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
 
                 if (user == null)
                 {
@@ -166,7 +166,7 @@ namespace NuUserStoreManager
 
         public override Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ExternalLoginSignInAsync invoked. External logins are not supported.");
                 return SignInResult.Failed;
             });
@@ -174,7 +174,7 @@ namespace NuUserStoreManager
 
         public override Task<SignInResult> ExternalLoginSignInAsync(string loginProvider, string providerKey, bool isPersistent, bool bypassTwoFactor)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ExternalLoginSignInAsync invoked. External logins are not supported.");
                 return SignInResult.Failed;
             });
@@ -182,14 +182,14 @@ namespace NuUserStoreManager
 
         public override Task ForgetTwoFactorClientAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ForgetTwoFactorClientAsync invoked. Two factor authenticaion is not supported.");
             });
         }
 
         public override Task<IEnumerable<AuthenticationScheme>> GetExternalAuthenticationSchemesAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetExternalAuthenticationSchemesAsync invoked. External logins are not supported.");
                 return new List<AuthenticationScheme>() as IEnumerable<AuthenticationScheme>;
             });
@@ -197,7 +197,7 @@ namespace NuUserStoreManager
 
         public override Task<ExternalLoginInfo> GetExternalLoginInfoAsync(string expectedXsrf = null)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetExternalLoginInfoAsync invoked. External logins are not supported.");
                 return new ExternalLoginInfo(new ClaimsPrincipal(), String.Empty, String.Empty, String.Empty);
             });
@@ -205,7 +205,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> GetTwoFactorAuthenticationUserAsync()
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("IsTwoFactorClientRememberedAsync invoked. Two factor authenticaion is not supported.");
                 return new NuApplicationUser();
             });
@@ -224,7 +224,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> IsTwoFactorClientRememberedAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("IsTwoFactorClientRememberedAsync invoked. Two factor authenticaion is not supported.");
                 return false;
             });
@@ -362,14 +362,14 @@ namespace NuUserStoreManager
 
         public override Task RefreshSignInAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RefreshSignInAsync invoked. Cookie refresh is not supported.");
             });
         }
 
         public override Task RememberTwoFactorClientAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RememberTwoFactorClientAsync invoked. Two factor authenticaion is not supported.");
                 return SignInResult.Failed;
             });
@@ -377,14 +377,14 @@ namespace NuUserStoreManager
 
         public override Task SignInAsync(NuApplicationUser user, bool isPersistent, string authenticationMethod = null)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SignInAsync invoked. User must sign in with password (PasswordSignInAsync).");
             });
         }
 
         public override Task SignInAsync(NuApplicationUser user, AuthenticationProperties authenticationProperties, string authenticationMethod = null)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SignInAsync invoked. User must sign in with password (PasswordSignInAsync).");
             });
         }
@@ -399,7 +399,7 @@ namespace NuUserStoreManager
 
         public override Task<SignInResult> TwoFactorAuthenticatorSignInAsync(string code, bool isPersistent, bool rememberClient)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("TwoFactorRecoveryCodeSignInAsync invoked. Two factor authenticaion is not supported.");
                 return SignInResult.Failed;
             });
@@ -407,7 +407,7 @@ namespace NuUserStoreManager
 
         public override Task<SignInResult> TwoFactorRecoveryCodeSignInAsync(string recoveryCode)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("TwoFactorRecoveryCodeSignInAsync invoked. Two factor authenticaion is not supported.");
                 return SignInResult.Failed;
             });
@@ -415,7 +415,7 @@ namespace NuUserStoreManager
 
         public override Task<SignInResult> TwoFactorSignInAsync(string provider, string code, bool isPersistent, bool rememberClient)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("TwoFactorSignInAsync invoked. Two factor authenticaion is not supported.");
                 return SignInResult.Failed;
             });
@@ -423,7 +423,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> UpdateExternalAuthenticationTokensAsync(ExternalLoginInfo externalLogin)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("UpdateExternalAuthenticationTokensAsync invoked. External logins are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("UpdateExternalAuthenticationTokensAsync") });
             });
@@ -431,7 +431,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> ValidateSecurityStampAsync(ClaimsPrincipal principal)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ValidateSecurityStampAsync invoked. Security stamps are not supported.");
                 return new NuApplicationUser();
             });
@@ -439,7 +439,7 @@ namespace NuUserStoreManager
 
         protected override Task<bool> IsLockedOut(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -476,7 +476,7 @@ namespace NuUserStoreManager
 
         protected override Task<SignInResult> LockedOut(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<SignInResult>(() => {
+            return Task.Run<SignInResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -528,7 +528,7 @@ namespace NuUserStoreManager
 
         protected override Task<SignInResult> PreSignInCheck(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<SignInResult>(() => {
+            return Task.Run<SignInResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -585,7 +585,7 @@ namespace NuUserStoreManager
 
         protected override Task ResetLockout(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -634,7 +634,7 @@ namespace NuUserStoreManager
 
         protected override Task<SignInResult> SignInOrTwoFactorAsync(NuApplicationUser user, bool isPersistent, string loginProvider = null, bool bypassTwoFactor = false)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SignInOrTwoFactorAsync invoked. Two factor authenticaion is not supported.");
                 return SignInResult.Failed;
             });

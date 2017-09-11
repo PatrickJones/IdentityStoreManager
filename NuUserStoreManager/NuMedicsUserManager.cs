@@ -46,7 +46,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AccessFailedAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -98,7 +98,7 @@ namespace NuUserStoreManager
 
         public override Task<int> GetAccessFailedCountAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<int>(() => {
+            return Task.Run<int>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -135,7 +135,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ResetAccessFailedCountAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -185,7 +185,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddClaimAsync(NuApplicationUser user, Claim claim)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddClaimAsync invoked. Adding Claim to database is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddClaimAsync") });
             });
@@ -193,7 +193,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddClaimsAsync(NuApplicationUser user, IEnumerable<Claim> claims)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddClaimAsync invoked. Adding Claims to database is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddClaimAsync") });
             });
@@ -201,7 +201,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddPasswordAsync(NuApplicationUser user, string password)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -257,7 +257,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ChangeEmailAsync(NuApplicationUser user, string newEmail, string token)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -335,7 +335,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> CheckPasswordAsync(NuApplicationUser user, string password)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -397,7 +397,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> FindByEmailAsync(string email)
         {
-            return Task.Factory.StartNew<NuApplicationUser>(() => {
+            return Task.Run<NuApplicationUser>(() => {
                 try
                 {
                     if (String.IsNullOrEmpty(email))
@@ -449,7 +449,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> FindByIdAsync(string userId)
         {
-            return Task.Factory.StartNew<NuApplicationUser>(() => {
+            return Task.Run<NuApplicationUser>(() => {
                 try
                 {
                     bool parsed = Guid.TryParse(userId, out Guid uGuid);
@@ -487,7 +487,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> FindByNameAsync(string userName)
         {
-            return Task.Factory.StartNew<NuApplicationUser>(() => {
+            return Task.Run<NuApplicationUser>(() => {
                 try
                 {
                     if (String.IsNullOrEmpty(userName))
@@ -522,7 +522,7 @@ namespace NuUserStoreManager
 
         public override Task<DateTimeOffset?> GetLockoutEndDateAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<DateTimeOffset?>(() => {
+            return Task.Run<DateTimeOffset?>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -557,7 +557,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> GetLockoutEnabledAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -592,7 +592,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetEmailAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<string>(() => {
+            return Task.Run<string>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -639,7 +639,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<Claim>> GetClaimsAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetClaimsAsync invoked. Claim stored in database is not supported.");
                 return new List<Claim>() as IList<Claim>;
             });
@@ -647,7 +647,7 @@ namespace NuUserStoreManager
 
         public override Task<NuApplicationUser> GetUserAsync(ClaimsPrincipal principal)
         {
-            return Task.Factory.StartNew<NuApplicationUser>(() => {
+            return Task.Run<NuApplicationUser>(() => {
 
                 var claimName = String.Empty;
 
@@ -780,7 +780,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<NuApplicationUser>> GetUsersForClaimAsync(Claim claim)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetUsersForClaimAsync invoked. Claim stored in database is not supported.");
                 return new List<NuApplicationUser>() as IList<NuApplicationUser>;
             });
@@ -788,7 +788,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveClaimAsync(NuApplicationUser user, Claim claim)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetClaimsAsync invoked. Claim stored in database is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveClaimAsync") });
             });
@@ -796,7 +796,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveClaimsAsync(NuApplicationUser user, IEnumerable<Claim> claims)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetClaimsAsync invoked. Claims stored in database is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveClaimsAsync") });
             });
@@ -804,7 +804,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ReplaceClaimAsync(NuApplicationUser user, Claim claim, Claim newClaim)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetClaimsAsync invoked. Claims stored in database is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("ReplaceClaimAsync") });
             });
@@ -812,7 +812,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetUserNameAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<string>(() => {
+            return Task.Run<string>(() => {
                 try
                 {
                     if (user == null || user.UserId.Equals(Guid.Empty))
@@ -852,7 +852,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetUserIdAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<string>(() => {
+            return Task.Run<string>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -892,7 +892,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> HasPasswordAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -927,7 +927,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> IsLockedOutAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<bool>(() => {
+            return Task.Run<bool>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -962,7 +962,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemovePasswordAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1012,7 +1012,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ResetPasswordAsync(NuApplicationUser user, string token, string newPassword)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1062,7 +1062,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetEmailAsync(NuApplicationUser user, string email)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1128,7 +1128,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetLockoutEnabledAsync(NuApplicationUser user, bool enabled)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1178,7 +1178,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetLockoutEndDateAsync(NuApplicationUser user, DateTimeOffset? lockoutEnd)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1228,7 +1228,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetUserNameAsync(NuApplicationUser user, string userName)
         {
-            return Task.Factory.StartNew<IdentityResult>(() => {
+            return Task.Run<IdentityResult>(() => {
                 try
                 {
                     if (user == null || user.UserId.Equals(Guid.Empty))
@@ -1278,7 +1278,7 @@ namespace NuUserStoreManager
 
         protected override Task<PasswordVerificationResult> VerifyPasswordAsync(IUserPasswordStore<NuApplicationUser> store, NuApplicationUser user, string password)
         {
-            return Task.Factory.StartNew<PasswordVerificationResult>(() => {
+            return Task.Run<PasswordVerificationResult>(() => {
                 try
                 {
                     if (user == null || String.IsNullOrEmpty(user.UserName))
@@ -1329,7 +1329,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> VerifyUserTokenAsync(NuApplicationUser user, string tokenProvider, string purpose, string token)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("VerifyUserTokenAsync invoked. Tokens are not supported.");
                 return false;
             });
@@ -1337,7 +1337,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> VerifyTwoFactorTokenAsync(NuApplicationUser user, string tokenProvider, string token)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("VerifyTwoFactorTokenAsync invoked. Tokens are not supported.");
                 return false;
             });
@@ -1345,7 +1345,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> VerifyChangePhoneNumberTokenAsync(NuApplicationUser user, string token, string phoneNumber)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("VerifyChangePhoneNumberTokenAsync invoked. Tokens are not supported.");
                 return false;
             });
@@ -1353,7 +1353,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> UpdateSecurityStampAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("UpdateSecurityStampAsync invoked. Security tokens are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("UpdateSecurityStampAsync") });
             });
@@ -1361,7 +1361,7 @@ namespace NuUserStoreManager
 
         public override Task UpdateNormalizedUserNameAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("UpdateNormalizedUserNameAsync invoked. Username normalization is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("UpdateNormalizedUserNameAsync") });
             });
@@ -1369,7 +1369,7 @@ namespace NuUserStoreManager
 
         public override Task UpdateNormalizedEmailAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("UpdateNormalizedEmailAsync invoked. Email normalization is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("UpdateNormalizedEmailAsync") });
             });
@@ -1377,7 +1377,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> UpdateAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("UpdateAsync invoked. Updating user is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("UpdateAsync") });
             });
@@ -1385,7 +1385,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetTwoFactorEnabledAsync(NuApplicationUser user, bool enabled)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SetTwoFactorEnabledAsync invoked. Two factor authentication is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("SetTwoFactorEnabledAsync") });
             });
@@ -1393,7 +1393,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetPhoneNumberAsync(NuApplicationUser user, string phoneNumber)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SetPhoneNumberAsync invoked. Phone numbers are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("SetPhoneNumberAsync") });
             });
@@ -1401,7 +1401,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> SetAuthenticationTokenAsync(NuApplicationUser user, string loginProvider, string tokenName, string tokenValue)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("SetAuthenticationTokenAsync invoked. Tokens are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("SetAuthenticationTokenAsync") });
             });
@@ -1409,7 +1409,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ResetAuthenticatorKeyAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ResetAuthenticatorKeyAsync invoked. Authenticator keys are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("ResetAuthenticatorKeyAsync") });
             });
@@ -1417,7 +1417,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveLoginAsync(NuApplicationUser user, string loginProvider, string providerKey)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RemoveLoginAsync invoked. Login providers are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveLoginAsync") });
             });
@@ -1425,7 +1425,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveFromRolesAsync(NuApplicationUser user, IEnumerable<string> roles)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RemoveFromRolesAsync invoked. Roles are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveFromRolesAsync") });
             });
@@ -1433,7 +1433,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveFromRoleAsync(NuApplicationUser user, string role)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RemoveFromRoleAsync invoked. Roles are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveFromRoleAsync") });
             });
@@ -1441,7 +1441,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RemoveAuthenticationTokenAsync(NuApplicationUser user, string loginProvider, string tokenName)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RemoveAuthenticationTokenAsync invoked. Tokens are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RemoveAuthenticationTokenAsync") });
             });
@@ -1454,7 +1454,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> RedeemTwoFactorRecoveryCodeAsync(NuApplicationUser user, string code)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("RedeemTwoFactorRecoveryCodeAsync invoked. Two factor authentication is not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("RedeemTwoFactorRecoveryCodeAsync") });
             });
@@ -1467,7 +1467,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> IsPhoneNumberConfirmedAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("IsPhoneNumberConfirmedAsync invoked. Phone number confirmations are not supported.");
                 return false;
             });
@@ -1475,7 +1475,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> IsInRoleAsync(NuApplicationUser user, string role)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("IsInRoleAsync invoked. Roles are not supported.");
                 return false;
             });
@@ -1483,7 +1483,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> IsEmailConfirmedAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("IsEmailConfirmedAsync invoked. Eamil confirmations are not supported.");
                 return false;
             });
@@ -1491,7 +1491,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<string>> GetValidTwoFactorProvidersAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetValidTwoFactorProvidersAsync invoked. Login providers are not supported.");
                 return new List<string>() as IList<string>;
             });
@@ -1499,7 +1499,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<NuApplicationUser>> GetUsersInRoleAsync(string roleName)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetUsersInRoleAsync invoked. Roles are not supported.");
                 return new List<NuApplicationUser>() as IList<NuApplicationUser>;
             });
@@ -1507,7 +1507,7 @@ namespace NuUserStoreManager
 
         public override Task<bool> GetTwoFactorEnabledAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetTwoFactorEnabledAsync invoked. Two factor authentication is not supported.");
                 return false;
             });
@@ -1515,7 +1515,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetSecurityStampAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetSecurityStampAsync invoked. Security stamps are not supported.");
                 return String.Empty;
             });
@@ -1523,7 +1523,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<string>> GetRolesAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetRolesAsync invoked. Roles are not supported.");
                 return new List<string>() as IList<string>;
             });
@@ -1531,7 +1531,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetPhoneNumberAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetPhoneNumberAsync invoked. Phone numbers are not supported.");
                 return String.Empty;
             });
@@ -1539,7 +1539,7 @@ namespace NuUserStoreManager
 
         public override Task<IList<UserLoginInfo>> GetLoginsAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetLoginsAsync invoked. Login providers are not supported.");
                 return new List<UserLoginInfo>() as IList<UserLoginInfo>;
             });
@@ -1547,7 +1547,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetAuthenticatorKeyAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetAuthenticatorKeyAsync invoked. Authenticator keys are not supported.");
                 return String.Empty;
             });
@@ -1555,7 +1555,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GetAuthenticationTokenAsync(NuApplicationUser user, string loginProvider, string tokenName)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GetAuthenticationTokenAsync invoked. Tokens are not supported.");
                 return String.Empty;
             });
@@ -1563,7 +1563,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateUserTokenAsync(NuApplicationUser user, string tokenProvider, string purpose)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateUserTokenAsync invoked. Tokens are not supported.");
                 return String.Empty;
             });
@@ -1571,7 +1571,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GeneratePasswordResetTokenAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GeneratePasswordResetTokenAsync invoked. Tokens are not supported.");
                 return String.Empty;
             });
@@ -1579,7 +1579,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateTwoFactorTokenAsync(NuApplicationUser user, string tokenProvider)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateTwoFactorTokenAsync invoked. Tokens are not supported.");
                 return String.Empty;
             });
@@ -1587,7 +1587,7 @@ namespace NuUserStoreManager
 
         public override Task<IEnumerable<string>> GenerateNewTwoFactorRecoveryCodesAsync(NuApplicationUser user, int number)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateNewTwoFactorRecoveryCodesAsync invoked. Recovery codes are not supported.");
                 return new List<string>() as IEnumerable<string>;
             });
@@ -1601,7 +1601,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateConcurrencyStampAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateConcurrencyStampAsync invoked. Concurrency stamps are not supported.");
                 return String.Empty;
             });
@@ -1609,7 +1609,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateEmailConfirmationTokenAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateEmailConfirmationTokenAsync invoked. Email tokens are not supported.");
                 return String.Empty;
             });
@@ -1617,7 +1617,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateChangeEmailTokenAsync(NuApplicationUser user, string newEmail)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("GenerateChangeEmailTokenAsync invoked. Email tokens are not supported.");
                 return String.Empty;
             });
@@ -1625,7 +1625,7 @@ namespace NuUserStoreManager
 
         public override Task<string> GenerateChangePhoneNumberTokenAsync(NuApplicationUser user, string phoneNumber)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddToRoleAsync invoked. Phone number tokens are not supported.");
                 return String.Empty ;
             });
@@ -1633,7 +1633,7 @@ namespace NuUserStoreManager
                                                           
         public override Task<NuApplicationUser> FindByLoginAsync(string loginProvider, string providerKey)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("FindByLoginAsync invoked. Exteranl logins are not supported.");
                 return new NuApplicationUser();
             });
@@ -1641,7 +1641,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> DeleteAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("DeleteAsync invoked. User deletion not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("DeleteAsync") });
             });
@@ -1649,7 +1649,7 @@ namespace NuUserStoreManager
 
         public override Task<byte[]> CreateSecurityTokenAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("CreateSecurityTokenAsync invoked. Roles are not supported.");
                 return new byte[0];
             });
@@ -1657,7 +1657,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> CreateAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("CreateAsync invoked. User creation not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("CreateAsync") });
             });
@@ -1665,7 +1665,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> CreateAsync(NuApplicationUser user, string password)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("CreateAsync invoked. User creation not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("CreateAsync") });
             });
@@ -1673,7 +1673,7 @@ namespace NuUserStoreManager
 
         public override Task<int> CountRecoveryCodesAsync(NuApplicationUser user)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("CountRecoveryCodesAsync invoked. Recovery codes are not supported.");
                 return 0;
             });
@@ -1681,7 +1681,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ConfirmEmailAsync(NuApplicationUser user, string token)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ConfirmEmailAsync invoked. Email validation tokens are not being used.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("ConfirmEmailAsync") });
             });
@@ -1689,7 +1689,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> ChangePhoneNumberAsync(NuApplicationUser user, string phoneNumber, string token)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("ChangePhoneNumberAsync invoked. Phone numbers are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("ChangePhoneNumberAsync") });
             });
@@ -1697,7 +1697,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddToRoleAsync(NuApplicationUser user, string role)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddToRoleAsync invoked. Roles are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddToRoleAsync") });
             });
@@ -1705,7 +1705,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddToRolesAsync(NuApplicationUser user, IEnumerable<string> roles)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddToRolesAsync invoked. Roles are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddToRolesAsync") });
             });
@@ -1713,7 +1713,7 @@ namespace NuUserStoreManager
 
         public override Task<IdentityResult> AddLoginAsync(NuApplicationUser user, UserLoginInfo login)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Run(() => {
                 Logger.LogError("AddLoginAsync invoked. External logins are not supported.");
                 return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddLoginAsync") });
             });
