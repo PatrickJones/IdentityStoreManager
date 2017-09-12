@@ -14,7 +14,7 @@ namespace NuUserStoreManagerTest.UserManagerTest
         [TestMethod]
         public void MyTestMethod()
         {
-            var result = uManager.AddClaimAsync(new NuApplicationUser(), new Claim("", "")).Result;
+            var result = uManager.AddClaimsAsync(new NuApplicationUser(), new List<Claim> { new Claim("", "") }).Result;
 
             Assert.IsFalse(result.Succeeded);
             Assert.AreEqual(result.Errors.Count(), 1);

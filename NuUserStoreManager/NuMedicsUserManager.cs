@@ -350,37 +350,32 @@ namespace NuUserStoreManager
                         return false;
                     }
 
-                    if (!String.IsNullOrEmpty(user.UserName))
+                    var u = ctx.UserAuthentications.SingleOrDefault(f => f.Username == user.UserName);
+
+                    int success = 0;
+
+                    if (u != null)
                     {
-                        var u = ctx.UserAuthentications.SingleOrDefault(f => f.Username == user.UserName);
-
-                        int success = 0;
-
-                        if (u != null)
-                        {
-                            //TODO: a decrypt logic
-                            success = (u.Password == password) ? 1 : 0;
-                        }
-                        else
-                        {
-                            Logger.LogInformation($"Password check failed for Username: {user.UserName}. Username not found");
-                            return false;
-                        }
-
-                        switch (success)
-                        {
-                            case 0:
-                                Logger.LogWarning($"Password check failed for Username: {user.UserName}.");
-                                return false;
-                            case 1:
-                            default:
-                                Logger.LogInformation($"Password check valid for Username: {user.UserName}");
-                                return true;
-                        }
+                        success = (DataEncryption.Decrypt(u.Password) == password) ? 1 : 0;
+                    }
+                    else
+                    {
+                        success = -1;
                     }
 
-                    Logger.LogWarning($"Password check failed for Username: {user.UserName}. Username not set on NuApplicationUser.");
-                    return false;
+                    switch (success)
+                    {
+                        case -1:
+                            Logger.LogInformation($"Password check failed for Username: {user.UserName}. Username not found");
+                            return false;
+                        case 0:
+                            Logger.LogInformation($"Password check failed for Username: {user.UserName}.");
+                            return false;
+                        case 1:
+                        default:
+                            Logger.LogInformation($"Password check valid for Username: {user.UserName}");
+                            return true;
+                    }
                 }
                 catch (InvalidOperationException e)
                 {

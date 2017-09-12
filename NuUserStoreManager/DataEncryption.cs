@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NuUserStoreManager
 {
-    internal static class DataEncryption
+    public static class DataEncryption
     {
         /// <summary>
         /// Encrypts a byte[] using AES algorithm.
