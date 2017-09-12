@@ -4,6 +4,7 @@ using NuUserStoreManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 
@@ -13,9 +14,13 @@ namespace NuUserStoreManagerTest.UserManagerTest
     public class AddClaimAsyncTest : BaseUnitTest
     {
         [TestMethod]
-        public void MyTestMethod()
+        public void Add_Claim_Not_Supported()
         {
-            Assert.Fail("No test composed.");
+            var result = uManager.AddClaimAsync(new NuApplicationUser(), new Claim("","")).Result;
+
+            Assert.IsFalse(result.Succeeded);
+            Assert.AreEqual(result.Errors.Count(), 1);
+            Assert.AreEqual(AppMessages.NotSupported("AddClaimAsync"), result.Errors.First().Description);
         }
     }
 }

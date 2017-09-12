@@ -195,7 +195,7 @@ namespace NuUserStoreManager
         {
             return Task.Run(() => {
                 Logger.LogError("AddClaimAsync invoked. Adding Claims to database is not supported.");
-                return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddClaimAsync") });
+                return IdentityResult.Failed(new IdentityError { Description = AppMessages.NotSupported("AddClaimsAsync") });
             });
         }
 
