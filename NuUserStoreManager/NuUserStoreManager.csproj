@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Authors>MuMedics Dev Team</Authors>
+    <Company>NuMedics, Inc.</Company>
+    <Product>NuUserStoreManager Library</Product>
+    <Description>.NET Core library for managing authentication for users and user store (database)</Description>
+    <Copyright>NuMedics 2017</Copyright>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>http://ov-sharepoint:8080/tfs/NETCoreCollection/NuStoreManager/</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
