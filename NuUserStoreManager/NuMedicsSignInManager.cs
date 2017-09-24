@@ -658,10 +658,13 @@ namespace NuUserStoreManager
                     var principle = await CreateClaimsPrincipleAsync(username, userId);
 
                     Logger.LogInformation("Creating SignInContext.");
+
+                    Context.User = principle;
+
                     await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principle, new AuthenticationProperties
                     {
                         AllowRefresh = false,
-                        IsPersistent = isPersistent,
+                        IsPersistent = true,
                         ExpiresUtc = DateTime.UtcNow.AddHours(1)
                     });
                 }
@@ -685,10 +688,16 @@ namespace NuUserStoreManager
                     new Claim(ClaimTypes.Sid, userId, ClaimValueTypes.Sid, Issuer )
                     };
 
+                    //var claims = new List<IdentityUserClaim<string>> {
+                    //new IdentityUserClaim<string>{ClaimType = ClaimTypes.Name, ClaimValue = username},
+                    //new IdentityUserClaim<string>{ClaimType = ClaimTypes.Sid, ClaimValue = userId }
+                    //};
+
                     var userIdentity = new ClaimsIdentity("Login");
                     userIdentity.AddClaims(claims);
 
                     Logger.LogInformation("ClaimsPrinciple created.");
+
                     return new ClaimsPrincipal(userIdentity);
                 }
             });
