@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Description>Custom NuMedics user manager</Description>
+    <Copyright>2017</Copyright>
+    <Authors>NuMedics Dev Team</Authors>
+    <Company>NuMedics, Inc.</Company>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

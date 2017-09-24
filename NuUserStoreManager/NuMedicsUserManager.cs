@@ -1444,7 +1444,7 @@ namespace NuUserStoreManager
 
         public override void RegisterTokenProvider(string providerName, IUserTwoFactorTokenProvider<NuApplicationUser> provider)
         {
-            Logger.LogError("RedeemTwoFactorRecoveryCodeAsync invoked. Two factor authentication is not supported.");
+            Logger.LogError("RegisterTokenProvider invoked. Two factor authentication is not supported.");
         }
 
         public override Task<IdentityResult> RedeemTwoFactorRecoveryCodeAsync(NuApplicationUser user, string code)
