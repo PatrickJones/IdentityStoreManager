@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+<AssemblyVersion>1.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
     <Authors>MuMedics Dev Team</Authors>
     <Company>NuMedics, Inc.</Company>

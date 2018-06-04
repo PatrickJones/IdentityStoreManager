@@ -260,6 +260,9 @@ namespace NuUserStoreManager
                         if (password == DataEncryption.Decrypt(u.Password))
                         {
                             await this.CreateSignInContextAsync(u.Username, u.UserId.ToString(), isPersistent);
+
+                            Logger.LogInformation($"Password signin successful for Username: {user.UserName}");
+
                             return SignInResult.Success;
                         }
                         else
@@ -325,6 +328,9 @@ namespace NuUserStoreManager
                         if (password == DataEncryption.Decrypt(u.Password))
                         {
                             await this.CreateSignInContextAsync(u.Username, u.UserId.ToString(), isPersistent);
+
+                            Logger.LogInformation($"Password signin successful for Username: {userName}");
+
                             return SignInResult.Success;
                         }
                         else
@@ -651,10 +657,14 @@ namespace NuUserStoreManager
                 {
                     var principle = await CreateClaimsPrincipleAsync(username, userId);
 
+                    Logger.LogInformation("Creating SignInContext.");
+
+                    Context.User = principle;
+
                     await Context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principle, new AuthenticationProperties
                     {
                         AllowRefresh = false,
-                        IsPersistent = isPersistent,
+                        IsPersistent = true,
                         ExpiresUtc = DateTime.UtcNow.AddHours(1)
                     });
                 }
@@ -676,10 +686,17 @@ namespace NuUserStoreManager
                     var claims = new List<Claim> {
                     new Claim(ClaimTypes.Name, username, ClaimValueTypes.String, Issuer),
                     new Claim(ClaimTypes.Sid, userId, ClaimValueTypes.Sid, Issuer )
-                };
+                    };
+
+                    //var claims = new List<IdentityUserClaim<string>> {
+                    //new IdentityUserClaim<string>{ClaimType = ClaimTypes.Name, ClaimValue = username},
+                    //new IdentityUserClaim<string>{ClaimType = ClaimTypes.Sid, ClaimValue = userId }
+                    //};
 
                     var userIdentity = new ClaimsIdentity("Login");
                     userIdentity.AddClaims(claims);
+
+                    Logger.LogInformation("ClaimsPrinciple created.");
 
                     return new ClaimsPrincipal(userIdentity);
                 }
